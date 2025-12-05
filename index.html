@@ -2,38 +2,849 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FXDPRO PremiumCenter v5.2</title>
+  <title>FXDPRO PremiumCenter v5.1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- ===========================
+       FXDPRO Dark Neon Theme
+       （FRAME + Step3 完全版）
+  ============================ -->
+  <style>
+  /* ==========================================================
+     FXDPRO PremiumCenter v5.1 ? Dark Neon Theme (Step2)
+  ========================================================== */
+
+  /* Reset */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #04060D; /* 深いネオンブラック */
+    color: #E5F0FF;
+    overflow: hidden;
+  }
+
+  /* ==========================================
+     COLOR PALETTE（Neon）
+  ========================================== */
+  :root {
+    --bg-main: #04060D;
+    --bg-panel: #080B16;
+    --bg-panel-2: #0C1020;
+
+    --line-hair: rgba(255,255,255,0.05);
+    --line-soft: rgba(255,255,255,0.08);
+
+    --text-main: #E5F0FF;
+    --text-sub: #7B8AA5;
+    --text-faint: rgba(255,255,255,0.55);
+
+    /* Neon Accent */
+    --neon-green: #44FFB4;
+    --neon-blue: #1FA9FF;
+    --neon-red: #FF4D6D;
+    --neon-amber: #F9C74F;
+  }
+
+  /* スクロールバー（Premium仕様） */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.18);
+  }
+
+  /* ==========================================
+     App Wrapper
+  ========================================== */
+  .app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-main);
+  }
+
+  /* ==========================================
+     TOP BAR（ネオン魅せ）
+  ========================================== */
+  .top-bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(
+      to right,
+      rgba(5, 7, 18, 0.95),
+      rgba(10, 12, 24, 0.95)
+    );
+    border-bottom: 1px solid var(--line-hair);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .logo-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: radial-gradient(circle at 30% 20%, var(--neon-green), #1E2238 55%, #050712 100%);
+    box-shadow: 0 0 8px rgba(68,255,180,0.25);
+  }
+
+  .logo-text-main {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .logo-text-sub {
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .top-meta {
+    text-align: right;
+    font-size: 0.78rem;
+  }
+
+  /* ==========================================
+     Layout（PC 2-Column）
+  ========================================== */
+  .main-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ==========================================
+     WATCHLIST PANEL（左）
+  ========================================== */
+  .panel-watchlist {
+    flex: 0 0 280px;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--line-hair);
+    min-height: 0;
+  }
+
+  .panel-header {
+    padding: 0.75rem 1rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+    border-bottom: 1px solid var(--line-hair);
+  }
+
+  /* Watchlist body */
+  .watchlist-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0.75rem;
+  }
+
+  .watchlist-placeholder {
+    color: var(--text-sub);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    padding: 0.4rem;
+  }
+
+  /* ==========================================
+     DETAIL PANEL（右）
+  ========================================== */
+  .panel-detail {
+    flex: 1 1 auto;
+    background: var(--bg-panel-2);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .detail-header {
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid var(--line-hair);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .detail-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .detail-meta {
+    font-size: 0.78rem;
+    opacity: 0.85;
+  }
+
+  /* Detail Body */
+  .detail-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 1.2rem;
+  }
+
+  .detail-placeholder {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    max-width: 720px;
+  }
+
+  .status-bar {
+    margin-top: 1rem;
+    padding: 0.9rem;
+    border-radius: 8px;
+    border: 1px dashed rgba(255,255,255,0.15);
+    color: var(--text-main);
+    opacity: 0.85;
+  }
+
+  /* ==========================================
+     MOBILE（Step5でさらに強化）
+  ========================================== */
+  .mobile-tabs {
+    display: none;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .mobile-tab-buttons {
+    display: flex;
+  }
+
+  .mobile-tab-button {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem 0.8rem;
+    background: transparent;
+    border: none;
+    color: var(--text-faint);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+
+  .mobile-tab-button.is-active {
+    color: var(--neon-green);
+    border-bottom: 2px solid var(--neon-green);
+  }
+
+  /* ==========================================
+     RESPONSIVE
+  ========================================== */
+  @media (max-width: 960px) {
+    .main-layout {
+      flex-direction: column;
+    }
+
+    .mobile-tabs {
+      display: block;
+    }
+
+    .panel-watchlist,
+    .panel-detail {
+      max-width: 100%;
+      border-right: none;
+    }
+
+    .panel-watchlist {
+      border-bottom: 1px solid var(--line-hair);
+    }
+
+    .panel-watchlist[data-mobile-hidden="true"],
+    .panel-detail[data-mobile-hidden="true"] {
+      display: none;
+    }
+  }
+
+  /* ======================================
+     Step3: Symbol Card UI（Neon仕様）
+  ====================================== */
+
+  .symbol-card {
+    padding: 0.65rem 0.75rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    margin-bottom: 0.55rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .symbol-card:hover {
+    background: rgba(68,255,180,0.06);
+    border-color: rgba(68,255,180,0.35);
+    box-shadow: 0 0 6px rgba(68,255,180,0.35);
+  }
+
+  .symbol-card.is-active {
+    background: rgba(68,255,180,0.09);
+    border-color: rgba(68,255,180,0.55);
+    box-shadow: 0 0 8px rgba(68,255,180,0.55);
+  }
+
+  .symbol-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .symbol-mini-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .tf-box span {
+    font-weight: 600;
+  }
+
+  /* Bias Colors */
+  .bias-strong-buy { color: #00FFCC; }
+  .bias-buy        { color: #44FFB4; }
+  .bias-neutral    { color: #A9B4C9; }
+  .bias-sell       { color: #FF4D6D; }
+  .bias-strong-sell{ color: #FF2277; }
+  .bias-unknown    { color: #999999; }
+
+  </style>
 </head>
 
 <body>
+  <div class="app" data-mode="list" id="fxdpro-app">
 
-<div class="app">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">FXDPRO</div>
+          <div class="logo-text-sub">PremiumCenter v5.1 ・ LIVE</div>
+        </div>
+      </div>
 
-  <!-- Left Panel: Watchlist -->
-  <aside class="left-panel" id="leftPanel">
-    <header class="left-header">
-      <h1>FXDPRO</h1>
-      <p>PremiumCenter v5.2</p>
+      <div class="top-meta">
+        <div id="fxdpro-version-label">v5.1 ・ LIVE</div>
+        <div id="fxdpro-last-updated">Awaiting CSV sync...</div>
+      </div>
     </header>
 
-    <div id="symbolList" class="symbol-list"></div>
-  </aside>
+    <!-- Mobile Tabs（スマホ時のみ表示） -->
+    <nav class="mobile-tabs" aria-label="Mobile view switch">
+      <div class="mobile-tab-buttons">
+        <button
+          type="button"
+          class="mobile-tab-button is-active"
+          data-target="watchlist"
+          id="tab-watchlist"
+        >
+          Watchlist
+        </button>
+        <button
+          type="button"
+          class="mobile-tab-button"
+          data-target="detail"
+          id="tab-detail"
+        >
+          Detail
+        </button>
+      </div>
+    </nav>
 
-  <!-- Right Panel: Focus View -->
-  <main class="right-panel" id="rightPanel">
-    <header class="focus-header">
-      <div class="focus-title" id="focusSymbol">Select a Pair</div>
-      <div class="focus-time" id="focusTime">Waiting CSV...</div>
-    </header>
+    <!-- Main 2-Column Layout -->
+    <main class="main-layout" aria-label="FXDPRO PremiumCenter main layout">
+      <!-- Left: Watchlist -->
+      <aside
+        class="panel-watchlist"
+        id="watchlist-panel"
+        data-mobile-hidden="false"
+        aria-label="Symbol watchlist"
+      >
+        <div class="panel-header">
+          Watchlist
+        </div>
 
-    <section class="focus-content" id="focusContent"></section>
-  </main>
+        <div class="watchlist-body" id="watchlist-body">
+          <div class="watchlist-placeholder">
+            Loading symbols...
+          </div>
+        </div>
+      </aside>
 
-</div>
+      <!-- Right: Detail Panel -->
+      <section
+        class="panel-detail"
+        id="detail-panel"
+        data-mobile-hidden="false"
+        aria-label="Symbol detail"
+      >
+        <header class="detail-header">
+          <div class="detail-title" id="detail-title">
+            Symbol detail view
+          </div>
+          <div class="detail-meta" id="detail-meta">
+          </div>
+        </header>
 
-<script src="app.js"></script>
+        <div class="detail-body" id="detail-body">
+          <div class="detail-placeholder">
+            <p>
+              <strong>FXDPRO PremiumCenter v5.1 LIVE</strong> Ready.
+            </p>
+            <p style="margin-top: 0.6rem;">
+              When MT4 updates
+              <code>/data/MULTI_TF_AI_SUMMARY.csv</code>,
+              this panel will show:
+            </p>
+            <ul style="margin-top: 0.4rem; padding-left: 1.1rem; opacity: 0.85;">
+              <li>Multi-timeframe bias (D1 / H4 / H1 / M15)</li>
+              <li>Confluence score &amp; AI labels</li>
+              <li>Score table &amp; premium metrics</li>
+            </ul>
+
+            <div class="status-bar" style="margin-top: 0.85rem;" id="status-bar">
+              Step3 ready: CSV loader &amp; card UI are active.  
+              Waiting for CSV from MT4.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ========================================
+       JS：Step3（Card + CSV Loader 完全版）
+       ※ 1つの <script> だけに統合
+  ========================================= -->
+  <script>
+  (function () {
+    "use strict";
+
+    // ---------------------------------------
+    // FXDPRO グローバル設定
+    // ---------------------------------------
+    var FXDPRO = (window.FXDPRO = window.FXDPRO || {});
+
+    FXDPRO.version = "5.1-live";
+    FXDPRO.csvUrl = "/data/MULTI_TF_AI_SUMMARY.csv";
+
+    FXDPRO.symbols = [
+      "EURUSD", "USDJPY", "GBPUSD", "AUDUSD", "USDCHF",
+      "NZDUSD", "USDCAD", "EURJPY", "GBPJPY", "AUDJPY",
+      "EURGBP", "EURAUD", "EURNZD", "EURCAD", "CADJPY",
+      "CHFJPY", "GBPCHF", "AUDCHF", "NZDJPY", "AUDCAD"
+    ];
+
+    FXDPRO.state = {
+      selectedSymbol: null,
+      lastUpdated: null,
+      dataBySymbol: {}
+    };
+
+    // ---------------------------------------
+    // Mobile タブ切り替え
+    // ---------------------------------------
+    function setupMobileTabs() {
+      var tabWatch = document.getElementById("tab-watchlist");
+      var tabDetail = document.getElementById("tab-detail");
+      var watchPanel = document.getElementById("watchlist-panel");
+      var detailPanel = document.getElementById("detail-panel");
+
+      if (!tabWatch || !tabDetail || !watchPanel || !detailPanel) return;
+
+      function activate(target) {
+        if (target === "watchlist") {
+          tabWatch.classList.add("is-active");
+          tabDetail.classList.remove("is-active");
+          watchPanel.dataset.mobileHidden = "false";
+          detailPanel.dataset.mobileHidden = "true";
+        } else {
+          tabWatch.classList.remove("is-active");
+          tabDetail.classList.add("is-active");
+          watchPanel.dataset.mobileHidden = "true";
+          detailPanel.dataset.mobileHidden = "false";
+        }
+      }
+
+      tabWatch.addEventListener("click", function () {
+        activate("watchlist");
+      });
+
+      tabDetail.addEventListener("click", function () {
+        activate("detail");
+      });
+
+      // 初期状態は Watchlist
+      activate("watchlist");
+    }
+
+    // ---------------------------------------
+    // Watchlist カード生成（Step3）
+    // ---------------------------------------
+    function buildWatchlistCards() {
+      var watchlistBody = document.getElementById("watchlist-body");
+      if (!watchlistBody) return;
+
+      watchlistBody.innerHTML = "";
+
+      FXDPRO.symbols.forEach(function (symbol) {
+        var card = document.createElement("div");
+        card.className = "symbol-card";
+        card.dataset.symbol = symbol;
+
+        card.innerHTML = [
+          '<div class="symbol-title">' + symbol + "</div>",
+          '<div class="symbol-mini-info">',
+          '  <div class="tf-box" data-tf="D1">D1: <span>-</span></div>',
+          '  <div class="tf-box" data-tf="H4">H4: <span>-</span></div>',
+          '  <div class="tf-box" data-tf="H1">H1: <span>-</span></div>',
+          '  <div class="tf-box" data-tf="M15">M15: <span>-</span></div>',
+          "</div>"
+        ].join("");
+
+        card.addEventListener("click", function () {
+          selectSymbol(symbol);
+        });
+
+        watchlistBody.appendChild(card);
+      });
+    }
+
+    // ---------------------------------------
+    // Bias → CSSクラス変換
+    // ---------------------------------------
+    function biasToClass(biasRaw) {
+      if (!biasRaw) return "bias-unknown";
+      var b = String(biasRaw).toUpperCase();
+
+      if (b.indexOf("STRONG_BUY") !== -1 || b.indexOf("STRONGBUY") !== -1) {
+        return "bias-strong-buy";
+      }
+      if (b.indexOf("STRONG_SELL") !== -1 || b.indexOf("STRONGSELL") !== -1) {
+        return "bias-strong-sell";
+      }
+      if (b.indexOf("BUY") !== -1) return "bias-buy";
+      if (b.indexOf("SELL") !== -1) return "bias-sell";
+      if (b.indexOf("NEUTRAL") !== -1 || b.indexOf("FLAT") !== -1) {
+        return "bias-neutral";
+      }
+      return "bias-unknown";
+    }
+
+    // ---------------------------------------
+    // CSV テキストをパース → 行配列に変換
+    // ---------------------------------------
+    function parseCsv(text) {
+      var lines = text.split(/\r?\n/).filter(function (l) {
+        return l.trim().length > 0;
+      });
+      if (!lines.length) return { rows: [], generated: null };
+
+      var header = lines[0].split(";");
+      var nameToIndex = {};
+      header.forEach(function (h, idx) {
+        nameToIndex[h.trim()] = idx;
+      });
+
+      function idx(name) {
+        return nameToIndex[name] !== undefined ? nameToIndex[name] : -1;
+      }
+
+      var col = {
+        generated_time: idx("generated_time"),
+        symbol: idx("symbol"),
+        D1_score: idx("D1_score"),
+        H4_score: idx("H4_score"),
+        H1_score: idx("H1_score"),
+        M15_score: idx("M15_score"),
+        D1_bias: idx("D1_bias"),
+        H4_bias: idx("H4_bias"),
+        H1_bias: idx("H1_bias"),
+        M15_bias: idx("M15_bias"),
+        confluence_score: idx("confluence_score"),
+        confluence_label: idx("confluence_label")
+      };
+
+      var rows = [];
+      for (var i = 1; i < lines.length; i++) {
+        var parts = lines[i].split(";");
+        if (!parts.length || parts.length < 4) continue;
+
+        var symbol = col.symbol >= 0 ? parts[col.symbol].trim() : null;
+        if (!symbol) continue;
+
+        // 日付フォーマットを "2025.12.05" → "2025-12-05" に軽く整形
+        var rawTime = col.generated_time >= 0 ? parts[col.generated_time].trim() : "";
+        if (rawTime && rawTime.indexOf(".") !== -1 && rawTime.indexOf("-") === -1) {
+          rawTime = rawTime.replace(/\./g, "-");
+        }
+
+        function num(idxCol) {
+          if (idxCol < 0) return null;
+          var v = parts[idxCol].trim();
+          if (v === "") return null;
+          var n = parseFloat(v);
+          return isNaN(n) ? null : n;
+        }
+
+        var row = {
+          generated_time: rawTime,
+          symbol: symbol,
+          D1_score: num(col.D1_score),
+          H4_score: num(col.H4_score),
+          H1_score: num(col.H1_score),
+          M15_score: num(col.M15_score),
+          D1_bias: col.D1_bias >= 0 ? parts[col.D1_bias].trim() : "",
+          H4_bias: col.H4_bias >= 0 ? parts[col.H4_bias].trim() : "",
+          H1_bias: col.H1_bias >= 0 ? parts[col.H1_bias].trim() : "",
+          M15_bias: col.M15_bias >= 0 ? parts[col.M15_bias].trim() : "",
+          confluence_score: num(col.confluence_score),
+          confluence_label:
+            col.confluence_label >= 0 ? parts[col.confluence_label].trim() : ""
+        };
+
+        rows.push(row);
+      }
+
+      var generated = rows.length ? rows[0].generated_time : null;
+      return { rows: rows, generated: generated };
+    }
+
+    // ---------------------------------------
+    // CSV 読み込み → state反映 → UI更新
+    // ---------------------------------------
+    function loadCsvAndApply() {
+      var lastUpdatedEl = document.getElementById("fxdpro-last-updated");
+      if (lastUpdatedEl) {
+        lastUpdatedEl.textContent = "Loading CSV… " + FXDPRO.csvUrl;
+      }
+
+      fetch(FXDPRO.csvUrl, { cache: "no-cache" })
+        .then(function (res) {
+          if (!res.ok) {
+            throw new Error("HTTP " + res.status);
+          }
+          return res.text();
+        })
+        .then(function (text) {
+          var parsed = parseCsv(text);
+          var rows = parsed.rows;
+
+          FXDPRO.state.dataBySymbol = {};
+          rows.forEach(function (row) {
+            FXDPRO.state.dataBySymbol[row.symbol] = row;
+          });
+          FXDPRO.state.lastUpdated = parsed.generated || null;
+
+          updateWatchlistBiasFromState();
+
+          // Detailパネルを更新
+          var firstSymbol = FXDPRO.state.selectedSymbol || FXDPRO.symbols[0];
+          FXDPRO.state.selectedSymbol = firstSymbol;
+          markActiveCard(firstSymbol);
+          renderDetail(firstSymbol);
+
+          if (lastUpdatedEl) {
+            if (FXDPRO.state.lastUpdated) {
+              lastUpdatedEl.textContent =
+                "CSV OK ・ " + FXDPRO.state.lastUpdated + " ・ " + FXDPRO.csvUrl;
+            } else {
+              lastUpdatedEl.textContent = "CSV OK ・ " + FXDPRO.csvUrl;
+            }
+          }
+
+          console.log("CSV loaded:", rows.length, "rows");
+        })
+        .catch(function (err) {
+          console.error("CSV load error:", err);
+          if (lastUpdatedEl) {
+            lastUpdatedEl.textContent =
+              "CSV load failed ・ " + FXDPRO.csvUrl + " ・ " + err.message;
+          }
+        });
+    }
+
+    // ---------------------------------------
+    // Watchlist カードに Bias を反映
+    // ---------------------------------------
+    function updateWatchlistBiasFromState() {
+      var cards = document.querySelectorAll(".symbol-card");
+      cards.forEach(function (card) {
+        var symbol = card.dataset.symbol;
+        var row = FXDPRO.state.dataBySymbol[symbol];
+        var tfBoxes = card.querySelectorAll(".tf-box");
+
+        ["D1", "H4", "H1", "M15"].forEach(function (tf, idx) {
+          var box = tfBoxes[idx];
+          if (!box) return;
+          var span = box.querySelector("span");
+          if (!span) return;
+
+          var bias = row ? row[tf + "_bias"] : "";
+          span.textContent = bias || "-";
+
+          span.className = "";
+          span.classList.add(biasToClass(bias));
+        });
+      });
+    }
+
+    // ---------------------------------------
+    // カード選択状態のマーク
+    // ---------------------------------------
+    function markActiveCard(symbol) {
+      document.querySelectorAll(".symbol-card").forEach(function (c) {
+        if (c.dataset.symbol === symbol) {
+          c.classList.add("is-active");
+        } else {
+          c.classList.remove("is-active");
+        }
+      });
+    }
+
+    // ---------------------------------------
+    // シンボル選択 → Detailパネル更新
+    // ---------------------------------------
+    function selectSymbol(symbol) {
+      FXDPRO.state.selectedSymbol = symbol;
+      markActiveCard(symbol);
+      renderDetail(symbol);
+
+      // モバイルでは Detail タブへ自動切替
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width <= 960) {
+        var tabDetail = document.getElementById("tab-detail");
+        if (tabDetail) tabDetail.click();
+      }
+    }
+
+    function renderDetail(symbol) {
+      var detailTitle = document.getElementById("detail-title");
+      var detailMeta = document.getElementById("detail-meta");
+      var detailBody = document.getElementById("detail-body");
+
+      if (detailTitle) {
+        detailTitle.textContent = symbol + " - Detail";
+      }
+
+      var row = FXDPRO.state.dataBySymbol[symbol];
+
+      if (!row) {
+        if (detailMeta) detailMeta.textContent = "CSV pending…";
+        if (detailBody) {
+          detailBody.innerHTML =
+            '<div style="font-size:0.85rem; opacity:0.8;">' +
+            "Waiting for CSV data for <strong>" +
+            symbol +
+            "</strong>…<br><br>" +
+            "MT4 が /data/MULTI_TF_AI_SUMMARY.csv を更新すると、" +
+            "ここに Bias / Score / Confluence が表示されます。" +
+            "</div>";
+        }
+        return;
+      }
+
+      // Meta行：Confluence + Score
+      if (detailMeta) {
+        var conf = row.confluence_label || "-";
+        var score =
+          row.confluence_score !== null && !isNaN(row.confluence_score)
+            ? row.confluence_score.toFixed(2)
+            : "-";
+        detailMeta.textContent = "Confluence: " + conf + " ・ Score: " + score;
+      }
+
+      if (detailBody) {
+        detailBody.innerHTML =
+          '<div style="font-size:0.86rem; line-height:1.6;">' +
+          "<p><strong>" +
+          symbol +
+          "</strong> multi-timeframe bias from CSV:</p>" +
+          '<table style="margin-top:0.7rem; border-collapse:collapse; font-size:0.82rem;">' +
+          "  <thead>" +
+          "    <tr>" +
+          '      <th style="padding:0.25rem 0.6rem; border-bottom:1px solid rgba(255,255,255,0.12); text-align:left;">TF</th>' +
+          '      <th style="padding:0.25rem 0.6rem; border-bottom:1px solid rgba(255,255,255,0.12); text-align:left;">Bias</th>' +
+          '      <th style="padding:0.25rem 0.6rem; border-bottom:1px solid rgba(255,255,255,0.12); text-align:left;">Score</th>' +
+          "    </tr>" +
+          "  </thead>" +
+          "  <tbody>" +
+          renderTfRow("D1", row.D1_bias, row.D1_score) +
+          renderTfRow("H4", row.H4_bias, row.H4_score) +
+          renderTfRow("H1", row.H1_bias, row.H1_score) +
+          renderTfRow("M15", row.M15_bias, row.M15_score) +
+          "  </tbody>" +
+          "</table>" +
+          "<p style='margin-top:0.9rem; font-size:0.78rem; opacity:0.75;'>" +
+          "generated_time: " +
+          (row.generated_time || "-") +
+          "</p>" +
+          "</div>";
+      }
+    }
+
+    function renderTfRow(tf, bias, score) {
+      var cls = biasToClass(bias);
+      var scoreText =
+        score !== null && !isNaN(score) ? score.toFixed(2) : "-";
+
+      return (
+        "<tr>" +
+        '<td style="padding:0.25rem 0.6rem; border-bottom:1px dotted rgba(255,255,255,0.08);">' +
+        tf +
+        "</td>" +
+        '<td style="padding:0.25rem 0.6rem; border-bottom:1px dotted rgba(255,255,255,0.08);">' +
+        '<span class="' +
+        cls +
+        '">' +
+        (bias || "-") +
+        "</span>" +
+        "</td>" +
+        '<td style="padding:0.25rem 0.6rem; border-bottom:1px dotted rgba(255,255,255,0.08);">' +
+        scoreText +
+        "</td>" +
+        "</tr>"
+      );
+    }
+
+    // ---------------------------------------
+    // DOM 準備完了 → 初期化
+    // ---------------------------------------
+    document.addEventListener("DOMContentLoaded", function () {
+      var versionLabel = document.getElementById("fxdpro-version-label");
+      if (versionLabel) {
+        versionLabel.textContent = "v5.1 ・ LIVE";
+      }
+
+      setupMobileTabs();
+      buildWatchlistCards();
+      loadCsvAndApply();
+
+      console.log("FXDPRO PremiumCenter v5.1 LIVE initialized.");
+    });
+  })();
+  </script>
 </body>
 </html>
