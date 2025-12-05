@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FXDPRO PremiumCenter v5.2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- Left Panel: Watchlist -->
+  <aside class="left-panel" id="leftPanel">
+    <header class="left-header">
+      <h1>FXDPRO</h1>
+      <p>PremiumCenter v5.2</p>
+    </header>
+
+    <div id="symbolList" class="symbol-list"></div>
+  </aside>
+
+  <!-- Right Panel: Focus View -->
+  <main class="right-panel" id="rightPanel">
+    <header class="focus-header">
+      <div class="focus-title" id="focusSymbol">Select a Pair</div>
+      <div class="focus-time" id="focusTime">Waiting CSV...</div>
+    </header>
+
+    <section class="focus-content" id="focusContent"></section>
+  </main>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

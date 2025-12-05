@@ -1,0 +1,98 @@
+:root {
+  --bg-main: #050712;
+  --bg-panel: #0A0E1A;
+  --bg-panel-2: #0F1324;
+  --text-main: #E5F0FF;
+  --text-sub: #7B8AA5;
+
+  --neon-green: #44FFB4;
+  --neon-blue:  #1FA9FF;
+  --neon-red:   #FF4D6A;
+  --neon-amber: #FFC847;
+}
+
+body {
+  background: var(--bg-main);
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  color: var(--text-main);
+  overflow: hidden; /* 固定 */
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left Panel */
+.left-panel {
+  width: 40%;
+  max-width: 420px;
+  min-width: 320px;
+  background: var(--bg-panel);
+  border-right: 1px solid #111522;
+  overflow-y: auto;
+}
+
+.left-header {
+  padding: 20px;
+  border-bottom: 1px solid #111522;
+}
+
+.symbol-list {
+  padding: 10px;
+}
+
+.symbol-card {
+  padding: 14px;
+  margin-bottom: 10px;
+  background: var(--bg-panel-2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.symbol-card:hover {
+  background: #141a2d;
+}
+.symbol-card.active {
+  outline: 2px solid var(--neon-blue);
+}
+
+/* Right Panel */
+.right-panel {
+  flex: 1;
+  background: var(--bg-main);
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.focus-header {
+  border-bottom: 1px solid #111522;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.focus-title {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.focus-content {
+  font-size: 18px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+  }
+  .left-panel {
+    width: 100%;
+    max-width: 100%;
+    height: 45vh;
+  }
+  .right-panel {
+    height: 55vh;
+  }
+}
